@@ -32,21 +32,19 @@
         const translations = {
             fr: {
                 backToTeas: "← Retour aux Thés",
-                heroTitle: "Thébec: L'Essence du Québec",
-                heroDescription: "Découvrez nos mélanges de thés exquis, élaborés avec l'esprit des régions uniques du Québec et des éléments naturels.",
-                signatureBlendsTitle: "Nos Mélanges Signature",
-                classicsTitle: "Les Classiques",
+                heroTitle: "L'Essence du Thé du Québec",
+                heroDescription: "Découvrez nos mélanges de thés, élaborés avec l'esprit des régions uniques du Québec et des éléments naturels.",
+                signatureBlendsTitle: "Nos mélanges Signature",
+                classicsTitle: "Les grands classiques",
                 mainIngredientsLabel: "Ingrédients principaux :",
-                noteText: "*Note : L'image de fond est l'emballage réel du produit."
             },
             en: {
                 backToTeas: "← Back to Teas",
-                heroTitle: "Thébec: The Essence of Quebec",
-                heroDescription: "Discover our exquisite tea blends, crafted with the spirit of Quebec's unique regions and natural elements.",
+                heroTitle: "The Essence of Quebec's Tea",
+                heroDescription: "Discover our tea blends, crafted with the spirit of Quebec's unique regions and natural elements.",
                 signatureBlendsTitle: "Our Signature Blends",
-                classicsTitle: "The Classics",
+                classicsTitle: "The Big Classics",
                 mainIngredientsLabel: "Main Ingredients:",
-                noteText: "*Note: Background image is the actual product packaging."
             }
         };
 
@@ -215,6 +213,7 @@
             );
         }
 
+        // === UPDATED PRODUCT SLIDE COMPONENT ===
         function ProductSlide({ tea, isTransitioning }) {
             const { useContext } = React;
             const { language } = useContext(LanguageContext);
@@ -227,23 +226,25 @@
                         transition-all duration-700 ease-in-out transform
                         ${isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}
                 >
-                    <div className="w-1/2 flex-shrink-0">
+                    {/* Left Side: Image */}
+                    <div className="w-1/2 flex-shrink-0 bg-gray-100 flex items-center justify-center p-4">
                         <img 
                             src={tea.imagePath} 
                             alt={tea.name[language]} 
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                             onError={(e) => e.target.src='https://placehold.co/800x1200?text=Image+Not+Found'}
                         />
                     </div>
                     
-                    <div className={`w-1/2 p-12 flex flex-col justify-center ${tea.backgroundColorClass} text-white overflow-y-auto`}>
+                    {/* Right Side: Description */}
+                    <div className={`w-1/2 p-8 md:p-12 flex flex-col justify-start ${tea.backgroundColorClass} text-white overflow-y-auto`}>
                         <div className="flex items-center mb-4">
                             {tea.elementIcon}
                             <span className="ml-4 text-xl font-semibold">{tea.element[language]}</span>
                         </div>
-                        <h2 className="text-6xl font-playfair-display font-bold mb-6">{tea.name[language]}</h2>
-                        <p className="text-xl font-inter mb-8 italic opacity-90">{tea.poeticText[language]}</p>
-                        <p className="text-lg font-inter">
+                        <h2 className="text-5xl md:text-6xl font-playfair-display font-bold mb-6">{tea.name[language]}</h2>
+                        <p className="text-lg md:text-xl font-inter mb-8 italic opacity-90">{tea.poeticText[language]}</p>
+                        <p className="text-base md:text-lg font-inter">
                             <span className="font-bold">{translations[language].mainIngredientsLabel}</span>
                             {' '}{tea.mainIngredients[language]}
                         </p>
