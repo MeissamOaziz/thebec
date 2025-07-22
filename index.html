@@ -33,12 +33,12 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Prevent body scroll, main content handles its own */
+            /* Removed overflow: hidden to allow scrolling */
         }
 
         /* Specific styles for the hero section background to ensure no borders */
         .hero-background {
-            background-image: url('/Fjord-du-Saguenay.jpg');
+            background-image: url('/thebec/Fjord-du-Saguenay.jpg'); /* Updated path for GitHub Pages */
             background-size: cover;
             background-position: center;
             height: calc(100vh - 64px); /* Full viewport height minus header height */
@@ -46,11 +46,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* Ensure content doesn't overflow */
+            overflow: hidden; /* Ensure content doesn't overflow within the hero section */
         }
     </style>
 </head>
-<body class="min-h-screen bg-gray-100 font-inter text-gray-800 flex flex-col overflow-hidden">
+<body class="min-h-screen bg-gray-100 font-inter text-gray-800 flex flex-col">
     <div id="root" class="min-h-screen flex flex-col"></div>
 
     <!-- React and ReactDOM CDNs -->
@@ -105,7 +105,7 @@
                     element: 'Éther',
                     poeticText: 'Sous les aurores boréales, le bleuet sauvage danse avec la camomille. Un thé noir enveloppant, porté par le parfum de la forêt boréale. Un moment suspendu entre éther et mystère.',
                     mainIngredients: 'Bleuets, thé noir, camomille, pétales de rose, myrique baumier',
-                    imagePath: '/Délice Boréal.jpg',
+                    imagePath: '/thebec/Délice Boréal.jpg', /* Updated path */
                     backgroundColorClass: 'bg-blue-900/50',
                     elementIcon: (
                         <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -119,7 +119,7 @@
                     element: 'Terre',
                     poeticText: 'Un sol riche, un souffle ancien. Les aiguilles de sapin rencontrent la poire mûre et les feuilles de myrtille dans une infusette qui respire la sérénité. Une ancre dans le cœur de la forêt.',
                     mainIngredients: 'Thé pu\'er, feuilles de myrtille, poire séchée, sapin baumier, camomille',
-                    imagePath: '/Terre Ancestrale.jpg',
+                    imagePath: '/thebec/Terre Ancestrale.jpg', /* Updated path */
                     backgroundColorClass: 'bg-stone-900/50',
                     elementIcon: (
                         <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -133,7 +133,7 @@
                     element: 'Feu',
                     poeticText: 'Le crépitement des feuilles, l’air sucré des vergers, la chaleur du bois. Un thé rond, aux notes de pomme, canneberge et érable, qui capture la magie des jours dorés.',
                     mainIngredients: 'Rooibos, écorce d’érable, pomme séchée, canneberges, verge d’or',
-                    imagePath: '/Couleurs d\'Automne.jpg',
+                    imagePath: '/thebec/Couleurs d\'Automne.jpg', /* Updated path */
                     backgroundColorClass: 'bg-red-900/50',
                     elementIcon: (
                         <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +147,7 @@
                     element: 'Eau',
                     poeticText: 'Quand l’océan s’étire en brume sur les caps, une fraîcheur pure monte du sol. Ce mélange végétal vivifiant unit le thé vert, la menthe et la mer pour éveiller les sens.',
                     mainIngredients: 'Thé vert, menthe poivrée, citronnelle, algue dulse, mélisse',
-                    imagePath: '/Matin de Brume.jpg',
+                    imagePath: '/thebec/Matin de Brume.jpg', /* Updated path */
                     backgroundColorClass: 'bg-cyan-900/50',
                     elementIcon: (
                         <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -161,7 +161,7 @@
                     element: 'Air',
                     poeticText: 'Légèreté des hauteurs, parfums fleuris, et silence du vent. Lavande, mélisse et thé blanc s’unissent dans une infusion aérienne, aussi subtile qu’une pensée qui passe.',
                     mainIngredients: 'Thé blanc, lavande, mélisse, ortie, fleurs de trèfle rouge',
-                    imagePath: '/Vent des Cretes.jpg',
+                    imagePath: '/thebec/Vent des Cretes.jpg', /* Updated path */
                     backgroundColorClass: 'bg-purple-900/50',
                     elementIcon: (
                         <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -197,13 +197,13 @@
                 // Wrap the entire application with LanguageContext.Provider
                 <LanguageContext.Provider value={{ language, setLanguage }}>
                     {/* Main container for the application */}
-                    <div className="min-h-screen bg-gray-100 font-inter text-gray-800 flex flex-col overflow-hidden">
+                    <div className="min-h-screen bg-gray-100 font-inter text-gray-800 flex flex-col">
                         {/* Header section */}
                         <header className="w-full bg-gradient-to-r from-stone-800 to-stone-900 text-white p-4 shadow-lg z-20">
                             <div className="container mx-auto flex justify-between items-center">
                                 {/* Thébec Logo */}
                                 <div className="flex items-center">
-                                    <img src="/Thébec transparent large.png" alt="Thébec Logo" className="h-10 mr-3" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/100x40/E0E0E0/808080?text=Thébec'; }} />
+                                    <img src="/thebec/Thébec transparent large.png" alt="Thébec Logo" className="h-10 mr-3" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/100x40/E0E0E0/808080?text=Thébec'; }} />
                                     <h1 className="text-4xl font-playfair-display font-bold text-gold-300 tracking-wide">Thébec</h1>
                                 </div>
 
@@ -237,7 +237,7 @@
                                     ${isTransitioning ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}>
 
                                     {/* Hero Section - now full width/height below header, no borders */}
-                                    <section className="hero-background relative w-full flex-grow flex items-center justify-center text-white overflow-hidden">
+                                    <section className="hero-background relative w-full flex-grow flex items-center justify-center text-white">
                                         <div className="absolute inset-0 bg-black/40"></div>
                                         <div className="relative z-10 text-center p-8">
                                             <h2 className="text-6xl font-playfair-display font-bold mb-4 drop-shadow-lg">{translations[language].heroTitle}</h2>
