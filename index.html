@@ -199,12 +199,12 @@
                     {/* Main container for the application */}
                     <div className="min-h-screen bg-gray-100 font-inter text-gray-800 flex flex-col">
                         {/* Header section */}
-                        <header className="w-full bg-gradient-to-r from-stone-800 to-stone-900 text-white p-4 shadow-lg z-20">
+                        <header className="w-full bg-white text-stone-900 p-4 shadow-lg z-20 py-6"> {/* Changed bg to white, text to stone-900, increased padding */}
                             <div className="container mx-auto flex justify-between items-center">
                                 {/* Thébec Logo */}
                                 <div className="flex items-center">
-                                    <img src="/thebec/Thébec transparent large.png" alt="Thébec Logo" className="h-10 mr-3" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/100x40/E0E0E0/808080?text=Thébec'; }} />
-                                    <h1 className="text-4xl font-playfair-display font-bold text-gold-300 tracking-wide">Thébec</h1>
+                                    <img src="/thebec/Thébec transparent large.png" alt="Thébec Logo" className="h-20 mr-3" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/100x40/E0E0E0/808080?text=Thébec'; }} /> {/* Increased logo size */}
+                                    <h1 className="text-4xl font-playfair-display font-bold text-stone-900 tracking-wide">Thébec</h1> {/* Changed text color */}
                                 </div>
 
                                 <div className="flex items-center space-x-4">
@@ -216,13 +216,22 @@
                                             {translations[language].backToTeas}
                                         </button>
                                     )}
-                                    {/* Language Toggle Button */}
-                                    <button
-                                        onClick={toggleLanguage}
-                                        className="px-4 py-2 bg-stone-700 text-white font-semibold rounded-full shadow-md hover:bg-stone-600 transition-colors duration-200"
-                                    >
-                                        {language === 'fr' ? 'EN' : 'FR'}
-                                    </button>
+                                    {/* Language Toggle Text */}
+                                    <div className="flex items-center space-x-2 text-stone-900"> {/* Changed text color */}
+                                        <span
+                                            onClick={() => setLanguage('en')}
+                                            className={`cursor-pointer font-semibold ${language === 'en' ? 'text-blue-600' : 'text-stone-900'} hover:text-blue-600 transition-colors duration-200`}
+                                        >
+                                            EN
+                                        </span>
+                                        <span className="font-bold">|</span>
+                                        <span
+                                            onClick={() => setLanguage('fr')}
+                                            className={`cursor-pointer font-semibold ${language === 'fr' ? 'text-blue-600' : 'text-stone-900'} hover:text-blue-600 transition-colors duration-200`}
+                                        >
+                                            FR
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </header>
@@ -316,7 +325,7 @@
                     style={{ backgroundImage: `url(${tea.imagePath})` }}
                 >
                     {/* Overlay for readability */}
-                    <div className="absolute inset-0 bg-black/50"></div>
+                    <div className="absolute inset-0 bg-black/30"></div> {/* Adjusted opacity */}
 
                     <div className={`relative z-10 p-8 rounded-lg ${tea.backgroundColorClass} max-w-3xl text-white shadow-xl`}>
                         <div className="flex flex-col items-center justify-center mb-4">
