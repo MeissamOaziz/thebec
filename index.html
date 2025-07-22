@@ -7,53 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom CSS for scrollbar and other specific styles */
-        .custom-scrollbar::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-
-        /* Ensure full height for the main content area */
-        html, body, #root {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Specific styles for the hero section background to ensure no borders */
-        .hero-background {
-            background-image: url('/thebec/Fjord-du-Saguenay.jpg'); /* Updated path for GitHub Pages */
-            background-size: cover;
-            background-position: center;
-            height: calc(100vh - 128px); /* Adjusted height for larger header */
-            width: 100%;
-            display: flex;
-            flex-direction: column; /* Allow content and gradient band to stack */
-            align-items: center;
-            justify-content: center; /* Changed for better vertical alignment */
-            overflow: hidden; /* Ensure content doesn't overflow within the hero section */
-        }
-
-        /* Custom CSS for gradient text */
+        .custom-scrollbar::-webkit-scrollbar { height: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }
+        html, body, #root { height: 100%; margin: 0; padding: 0; }
         .text-gradient-natural-luxury {
-            background-image: linear-gradient(to right, #1a4d2e, #b8860b); /* Deep forest green to dark goldenrod */
+            background-image: linear-gradient(to right, #1a4d2e, #b8860b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            color: transparent; /* Fallback for non-webkit browsers */
+            color: transparent;
         }
     </style>
 </head>
@@ -65,9 +29,6 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
-        // This script block acts as your 'script.js' file in a real project
-
-        // Define translations object
         const translations = {
             fr: {
                 backToTeas: "← Retour aux Thés",
@@ -87,111 +48,42 @@
             }
         };
 
-        // Create a React Context for language
         const LanguageContext = React.createContext();
 
-        // Main App component
         function App() {
             const { useState, useEffect, useContext } = React;
-
             const [activeTea, setActiveTea] = useState(null);
             const [isTransitioning, setIsTransitioning] = useState(false);
             const [language, setLanguage] = useState('fr');
 
-            // **FIX:** This new useEffect hook correctly handles the fade-in animation
-            // for both the product page and the main landing page.
             useEffect(() => {
-                // If we are in a transition state (meaning a component has just faded out),
-                // we set a short timer and then set isTransitioning to false.
-                // This triggers the fade-in animation on the newly mounted component.
                 if (isTransitioning) {
-                    const timer = setTimeout(() => {
-                        setIsTransitioning(false);
-                    }, 50); // A small delay to ensure the new component is in the DOM
+                    const timer = setTimeout(() => setIsTransitioning(false), 50);
                     return () => clearTimeout(timer);
                 }
-            }, [activeTea]); // This effect runs every time the view changes (when activeTea is updated)
-
+            }, [activeTea]);
 
             const teaData = [
-                {
-                    id: 'delice-boreal',
-                    name: 'Délice Boréal',
-                    element: 'Éther',
-                    poeticText: 'Sous les aurores boréales, le bleuet sauvage danse avec la camomille. Un thé noir enveloppant, porté par le parfum de la forêt boréale. Un moment suspendu entre éther et mystère.',
-                    mainIngredients: 'Bleuets, thé noir, camomille, pétales de rose, myrique baumier',
-                    imagePath: '/thebec/Délice-Boréal.png',
-                    backgroundColorClass: 'bg-blue-900/50',
-                    bandColorClass: 'bg-blue-700/70',
-                    elementIcon: ( <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16v4m-2-2h4m5-16v4m-2-2h4M8 20h.01M12 20h.01M16 20h.01M12 14v.01M12 10v.01M12 6v.01M16 10v.01M16 14v.01M8 10v.01M8 14v.01"></path></svg> )
-                },
-                {
-                    id: 'terre-ancestrale',
-                    name: 'Terre Ancestrale',
-                    element: 'Terre',
-                    poeticText: 'Un sol riche, un souffle ancien. Les aiguilles de sapin rencontrent la poire mûre et les feuilles de myrtille dans une infusette qui respire la sérénité. Une ancre dans le cœur de la forêt.',
-                    mainIngredients: 'Thé pu\'er, feuilles de myrtille, poire séchée, sapin baumier, camomille',
-                    imagePath: '/thebec/Terre-Ancestrale.png',
-                    backgroundColorClass: 'bg-stone-900/50',
-                    bandColorClass: 'bg-amber-700/70',
-                    elementIcon: ( <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m0 0l-7 7-7-7m7 7v10a1 1 0 001 1h3"></path></svg> )
-                },
-                {
-                    id: 'couleurs-automne',
-                    name: 'Couleurs d’Automne',
-                    element: 'Feu',
-                    poeticText: 'Le crépitement des feuilles, l’air sucré des vergers, la chaleur du bois. Un thé rond, aux notes de pomme, canneberge et érable, qui capture la magie des jours dorés.',
-                    mainIngredients: 'Rooibos, écorce d’érable, pomme séchée, canneberges, verge d’or',
-                    imagePath: '/thebec/Couleurs-dAutomne.png',
-                    backgroundColorClass: 'bg-red-900/50',
-                    bandColorClass: 'bg-orange-700/70',
-                    elementIcon: ( <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 18a2 2 0 002-2V9.5a2 2 0 00-2-2h-3.586a1 1 0 01-.707-.293l-1.414-1.414a1 1 0 00-.707-.293H7a2 2 0 00-2 2V16a2 2 0 002 2h10z"></path></svg> )
-                },
-                {
-                    id: 'matin-brume',
-                    name: 'Matin de Brume',
-                    element: 'Eau',
-                    poeticText: 'Quand l’océan s’étire en brume sur les caps, une fraîcheur pure monte du sol. Ce mélange végétal vivifiant unit le thé vert, la menthe et la mer pour éveiller les sens.',
-                    mainIngredients: 'Thé vert, menthe poivrée, citronnelle, algue dulse, mélisse',
-                    imagePath: '/thebec/Matin-de-Brume.png',
-                    backgroundColorClass: 'bg-cyan-900/50',
-                    bandColorClass: 'bg-cyan-700/70',
-                    elementIcon: ( <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 19l6-6 4 4 6-6"></path></svg> )
-                },
-                {
-                    id: 'vent-cretes',
-                    name: 'Vent des Crêtes',
-                    element: 'Air',
-                    poeticText: 'Légèreté des hauteurs, parfums fleuris, et silence du vent. Lavande, mélisse et thé blanc s’unissent dans une infusion aérienne, aussi subtile qu’une pensée qui passe.',
-                    mainIngredients: 'Thé blanc, lavande, mélisse, ortie, fleurs de trèfle rouge',
-                    imagePath: '/thebec/Vent-des-Cretes.png',
-                    backgroundColorClass: 'bg-purple-900/50',
-                    bandColorClass: 'bg-purple-700/70',
-                    elementIcon: ( <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg> )
-                },
+                { id: 'delice-boreal', name: 'Délice Boréal', element: 'Éther', poeticText: 'Sous les aurores boréales, le bleuet sauvage danse avec la camomille. Un thé noir enveloppant, porté par le parfum de la forêt boréale. Un moment suspendu entre éther et mystère.', mainIngredients: 'Bleuets, thé noir, camomille, pétales de rose, myrique baumier', imagePath: '/thebec/Délice-Boréal.png', backgroundColorClass: 'bg-blue-900/50', bandColorClass: 'bg-blue-700/70', elementIcon: ( <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16v4m-2-2h4m5-16v4m-2-2h4M8 20h.01M12 20h.01M16 20h.01M12 14v.01M12 10v.01M12 6v.01M16 10v.01M16 14v.01M8 10v.01M8 14v.01"></path></svg> ) },
+                { id: 'terre-ancestrale', name: 'Terre Ancestrale', element: 'Terre', poeticText: 'Un sol riche, un souffle ancien. Les aiguilles de sapin rencontrent la poire mûre et les feuilles de myrtille dans une infusette qui respire la sérénité. Une ancre dans le cœur de la forêt.', mainIngredients: 'Thé pu\'er, feuilles de myrtille, poire séchée, sapin baumier, camomille', imagePath: '/thebec/Terre-Ancestrale.png', backgroundColorClass: 'bg-stone-900/50', bandColorClass: 'bg-amber-700/70', elementIcon: ( <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m0 0l-7 7-7-7m7 7v10a1 1 0 001 1h3"></path></svg> ) },
+                { id: 'couleurs-automne', name: 'Couleurs d’Automne', element: 'Feu', poeticText: 'Le crépitement des feuilles, l’air sucré des vergers, la chaleur du bois. Un thé rond, aux notes de pomme, canneberge et érable, qui capture la magie des jours dorés.', mainIngredients: 'Rooibos, écorce d’érable, pomme séchée, canneberges, verge d’or', imagePath: '/thebec/Couleurs-dAutomne.png', backgroundColorClass: 'bg-red-900/50', bandColorClass: 'bg-orange-700/70', elementIcon: ( <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 18a2 2 0 002-2V9.5a2 2 0 00-2-2h-3.586a1 1 0 01-.707-.293l-1.414-1.414a1 1 0 00-.707-.293H7a2 2 0 00-2 2V16a2 2 0 002 2h10z"></path></svg> ) },
+                { id: 'matin-brume', name: 'Matin de Brume', element: 'Eau', poeticText: 'Quand l’océan s’étire en brume sur les caps, une fraîcheur pure monte du sol. Ce mélange végétal vivifiant unit le thé vert, la menthe et la mer pour éveiller les sens.', mainIngredients: 'Thé vert, menthe poivrée, citronnelle, algue dulse, mélisse', imagePath: '/thebec/Matin-de-Brume.png', backgroundColorClass: 'bg-cyan-900/50', bandColorClass: 'bg-cyan-700/70', elementIcon: ( <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 19l6-6 4 4 6-6"></path></svg> ) },
+                { id: 'vent-cretes', name: 'Vent des Crêtes', element: 'Air', poeticText: 'Légèreté des hauteurs, parfums fleuris, et silence du vent. Lavande, mélisse et thé blanc s’unissent dans une infusion aérienne, aussi subtile qu’une pensée qui passe.', mainIngredients: 'Thé blanc, lavande, mélisse, ortie, fleurs de trèfle rouge', imagePath: '/thebec/Vent-des-Cretes.png', backgroundColorClass: 'bg-purple-900/50', bandColorClass: 'bg-purple-700/70', elementIcon: ( <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg> ) },
             ];
 
-            // **FIX:** Simplified logic. It now just starts the fade-out process.
             const handleTeaClick = (tea) => {
-                if (isTransitioning) return; // Prevent starting a new transition while one is active
-                setIsTransitioning(true); // Start fade-out
-                setTimeout(() => {
-                    setActiveTea(tea); // Change view. The useEffect will handle the fade-in.
-                }, 600);
+                if (isTransitioning) return;
+                setIsTransitioning(true);
+                setTimeout(() => setActiveTea(tea), 600);
             };
 
-            // **FIX:** Simplified logic. It now just starts the fade-out process.
             const handleBackToLanding = () => {
-                if (isTransitioning) return; // Prevent starting a new transition while one is active
-                setIsTransitioning(true); // Start fade-out
-                setTimeout(() => {
-                    setActiveTea(null); // Change view. The useEffect will handle the fade-in.
-                }, 600);
+                if (isTransitioning) return;
+                setIsTransitioning(true);
+                setTimeout(() => setActiveTea(null), 600);
             };
 
-            const toggleLanguage = (lang) => {
-                setLanguage(lang);
-            };
+            const toggleLanguage = (lang) => setLanguage(lang);
 
             return (
                 <LanguageContext.Provider value={{ language, setLanguage }}>
@@ -199,14 +91,11 @@
                         <header className="w-full bg-white text-stone-900 p-4 shadow-lg z-20 h-32 flex items-center">
                             <div className="container mx-auto flex justify-between items-center h-full">
                                 <div className="flex items-center h-full">
-                                    <img src="/thebec/Thébec-transparent-large.png" alt="Thébec Logo" className="h-full object-contain" onError={(e) => { console.error("Logo failed to load:", e.target.src); e.target.onerror = null; e.target.src = 'https://placehold.co/100x40/E0E0E0/808080?text=Thébec'; }} />
+                                    <img src="/thebec/Thébec-transparent-large.png" alt="Thébec Logo" className="h-full object-contain" onError={(e) => e.target.src='https://placehold.co/100x40?text=Thébec'} />
                                 </div>
                                 <div className="flex items-center space-x-4">
                                     {activeTea && (
-                                        <button
-                                            onClick={handleBackToLanding}
-                                            className="px-6 py-2 bg-gradient-to-r from-gold-500 to-gold-600 text-white font-semibold rounded-full shadow-lg hover:from-gold-600 hover:to-gold-700 transition-all duration-300 ease-in-out transform hover:scale-105"
-                                        >
+                                        <button onClick={handleBackToLanding} className="px-6 py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-stone-800 font-semibold rounded-full shadow-lg hover:from-amber-600 hover:to-amber-700 transition-all duration-300 ease-in-out transform hover:scale-105">
                                             {translations[language].backToTeas}
                                         </button>
                                     )}
@@ -220,23 +109,37 @@
                         </header>
 
                         <main className="flex-grow relative flex flex-col items-center justify-center">
-                            {/* The transition classes are now on the container for each view */}
                             {!activeTea ? (
                                 <div className={`w-full h-full flex flex-col transition-all duration-700 ease-in-out ${isTransitioning ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}>
-                                    <section className="hero-background relative w-full flex-grow flex items-center justify-center text-white">
-                                        <div className="relative z-10 text-center p-8 rounded-lg bg-black/20">
-                                            <h2 className="text-6xl font-playfair-display font-bold mb-4 drop-shadow-lg text-white">{translations[language].heroTitle}</h2>
-                                            <p className="text-xl font-inter max-w-2xl mx-auto opacity-90 text-white">{translations[language].heroDescription}</p>
-                                        </div>
-                                        <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-b from-transparent to-white flex items-end justify-center pb-4">
-                                            <h3 className="text-4xl font-playfair-display font-bold text-center text-gradient-natural-luxury py-2">{translations[language].signatureBlendsTitle}</h3>
+                                    {/* === NEW COLLAGE SECTION START === */}
+                                    <section className="relative w-full flex-grow grid grid-cols-4 grid-rows-3 overflow-hidden h-[calc(100vh-128px)]">
+                                        {/* Grid background images */}
+                                        <div className="col-span-2 bg-cover bg-center transition-transform duration-300 hover:scale-105" style={{ backgroundImage: "url('/thebec/lavandequebec.jpg')" }}></div>
+                                        <div className="col-span-2 bg-cover bg-center transition-transform duration-300 hover:scale-105" style={{ backgroundImage: "url('/thebec/bleuetsquebec.jpg')" }}></div>
+                                        <div className="row-span-2 bg-cover bg-center transition-transform duration-300 hover:scale-105" style={{ backgroundImage: "url('/thebec/myrique_baumier.jpg')" }}></div>
+                                        <div className="col-span-2 bg-cover bg-center transition-transform duration-300 hover:scale-105" style={{ backgroundImage: "url('/thebec/camomille-tisane.jpg')" }}></div>
+                                        <div className="row-span-2 bg-cover bg-center transition-transform duration-300 hover:scale-105" style={{ backgroundImage: "url('/thebec/erable.jpg')" }}></div>
+                                        <div className="col-span-2 bg-cover bg-center transition-transform duration-300 hover:scale-105" style={{ backgroundImage: "url('/thebec/Rooibos.jpg')" }}></div>
+                                        
+                                        {/* Overlay container for text and gradients */}
+                                        <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+                                            <div className="absolute inset-0 bg-black/30"></div> {/* Black overlay for readability */}
+                                            <div className="relative z-10 text-center p-8">
+                                                <h2 className="text-6xl font-playfair-display font-bold mb-4 drop-shadow-lg">{translations[language].heroTitle}</h2>
+                                                <p className="text-xl font-inter max-w-2xl mx-auto opacity-90">{translations[language].heroDescription}</p>
+                                            </div>
+                                            <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-b from-transparent to-white flex items-end justify-center pb-4">
+                                                <h3 className="text-4xl font-playfair-display font-bold text-center text-gradient-natural-luxury py-2">{translations[language].signatureBlendsTitle}</h3>
+                                            </div>
                                         </div>
                                     </section>
+                                    {/* === NEW COLLAGE SECTION END === */}
+
                                     <section className="w-full bg-white">
                                         <div className="flex w-full h-[calc(100vh-theme(height.32)-10rem)]">
                                             {teaData.map((tea) => (
                                                 <div key={tea.id} className="relative flex-1 h-full overflow-hidden cursor-pointer group" onClick={() => handleTeaClick(tea)}>
-                                                    <img src={tea.imagePath} alt={tea.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out transform scale-110 group-hover:scale-100" onError={(e) => { console.error("Product image failed to load:", e.target.src); e.target.onerror = null; e.target.src = 'https://placehold.co/400x800/E0E0E0/808080?text=Image+Not+Found'; }} />
+                                                    <img src={tea.imagePath} alt={tea.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out transform scale-110 group-hover:scale-100" onError={(e) => e.target.src='https://placehold.co/400x800?text=Image+Not+Found'} />
                                                     <div className={`absolute inset-x-0 bottom-0 p-4 text-center ${tea.bandColorClass} text-white`}>
                                                         <h4 className="text-2xl font-playfair-display font-semibold">{tea.name}</h4>
                                                     </div>
@@ -246,14 +149,13 @@
                                     </section>
                                 </div>
                             ) : (
-                                // **FIX:** Removed onTransitionEnd prop, as it's no longer needed.
                                 <ProductSlide tea={activeTea} isTransitioning={isTransitioning} />
                             )}
                         </main>
 
                         <footer className="w-full bg-white text-stone-900 p-4 text-sm z-20 h-24 flex items-center justify-between">
                             <div className="flex items-center h-full">
-                                <img src="/thebec/Thébec-transparent-large.png" alt="Thébec Logo" className="h-full object-contain mr-3" onError={(e) => { console.error("Footer logo failed to load:", e.target.src); e.target.onerror = null; e.target.src = 'https://placehold.co/100x40/E0E0E0/808080?text=Thébec'; }} />
+                                <img src="/thebec/Thébec-transparent-large.png" alt="Thébec Logo" className="h-full object-contain mr-3" onError={(e) => e.target.src='https://placehold.co/100x40?text=Thébec'} />
                             </div>
                             <p className="text-right">&copy; {new Date().getFullYear()} Thébec. All rights reserved.</p>
                         </footer>
@@ -262,18 +164,14 @@
             );
         }
 
-        // **FIX:** Simplified component. Removed unused props and the flawed useEffect hook.
         function ProductSlide({ tea, isTransitioning }) {
             const { useContext } = React;
             const { language } = useContext(LanguageContext);
 
             return (
                 <div
-                    className={`w-full max-w-6xl h-[calc(100vh-theme(height.32)-theme(height.24))] bg-cover bg-center rounded-lg shadow-2xl overflow-hidden flex items-center justify-center p-8
-                        transition-all duration-700 ease-in-out transform
-                        ${isTransitioning ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}
-                    style={{ backgroundImage: `url(${tea.imagePath})` }}
-                >
+                    className={`w-full max-w-6xl h-[calc(100vh-theme(height.32)-theme(height.24))] bg-cover bg-center rounded-lg shadow-2xl overflow-hidden flex items-center justify-center p-8 transition-all duration-700 ease-in-out transform ${isTransitioning ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}
+                    style={{ backgroundImage: `url(${tea.imagePath})` }}>
                     <div className="absolute inset-0 bg-black/30"></div>
                     <div className={`relative z-10 p-8 rounded-lg ${tea.backgroundColorClass} max-w-3xl text-white shadow-xl`}>
                         <div className="flex flex-col items-center justify-center mb-4">
