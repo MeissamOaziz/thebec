@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thébec: L'Essence du Québec</title>
+    
+    <link rel="icon" type="image/png" href="/Thébec-transparent-large.png">
+    <link rel="apple-touch-icon" href="/Thébec-transparent-large.png">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -98,8 +102,8 @@
                 setTimeout(() => {
                     setCurrentView(view);
                     setActiveTea(tea);
-                    window.scrollTo(0, 0); // Scroll to top on view change
-                }, 300); // Shortened transition for quicker navigation
+                    window.scrollTo(0, 0);
+                }, 300);
             };
 
             const toggleLanguage = (lang) => setLanguage(lang);
@@ -122,14 +126,16 @@
                     <div className="min-h-screen bg-gray-100 font-inter text-gray-800 flex flex-col">
                         <header className="w-full bg-white text-stone-900 p-4 shadow-lg z-30 h-32 flex items-center sticky top-0">
                             <div className="container mx-auto flex justify-between items-center h-full">
-                                <div className="flex items-center h-full cursor-pointer" onClick={() => handleNavigate('home')}>
-                                    <img src="/Thébec-transparent-large.png" alt="Thébec Logo" className="h-full object-contain" onError={(e) => e.target.src='https://placehold.co/100x40?text=Thébec'} />
+                                <div className="w-1/4">
+                                    <div className="flex items-center h-full cursor-pointer" onClick={() => handleNavigate('home')}>
+                                        <img src="/Thébec-transparent-large.png" alt="Thébec Logo" className="h-full object-contain" onError={(e) => e.target.src='https://placehold.co/100x40?text=Thébec'} />
+                                    </div>
                                 </div>
-                                <div className="flex items-center space-x-4 md:space-x-6">
-                                    <nav className="hidden md:flex items-center space-x-6 text-lg font-semibold">
-                                        <a onClick={() => handleNavigate('home')} className="cursor-pointer hover:text-amber-600 transition-colors">{translations[language].home}</a>
-                                        <a onClick={() => handleNavigate('about')} className="cursor-pointer hover:text-amber-600 transition-colors">{translations[language].about}</a>
-                                    </nav>
+                                <nav className="w-1/2 flex justify-center items-center space-x-8 text-lg font-semibold uppercase tracking-wider">
+                                    <a onClick={() => handleNavigate('home')} className="cursor-pointer hover:text-amber-600 transition-colors">{translations[language].home}</a>
+                                    <a onClick={() => handleNavigate('about')} className="cursor-pointer hover:text-amber-600 transition-colors">{translations[language].about}</a>
+                                </nav>
+                                <div className="w-1/4 flex justify-end items-center space-x-4">
                                     <div className="flex items-center space-x-0 text-stone-900 font-bold">
                                         <span onClick={() => toggleLanguage('en')} className={`cursor-pointer px-2 py-1 ${language === 'en' ? 'text-blue-600' : 'text-stone-900'} hover:text-blue-600 transition-colors duration-200`}>EN</span>
                                         <span className="font-bold">|</span>
@@ -161,7 +167,7 @@
                         <div className="col-span-2 bg-cover bg-center transition-transform duration-300 hover:scale-105" style={{ backgroundImage: "url('/bleuetsquebec.jpg')" }}></div>
                         <div className="row-span-2 bg-cover bg-center transition-transform duration-300 hover:scale-105" style={{ backgroundImage: "url('/Vertical-TeaInNature.jpg')" }}></div>
                         <div className="col-span-2 bg-cover bg-center transition-transform duration-300 hover:scale-105" style={{ backgroundImage: "url('/camomille-tisane.jpg')" }}></div>
-                        <div className="row-span-2 bg-cover bg-center transition-transform duration-300 hover:scale-105" style={{ backgroundImage: "url('/Vertical-MountainTea.jpg')" }}></div>
+                        <div className="row-span-2 bg-cover bg-center transition-transform duration-300 hover:scale-105" style={{ backgroundImage: "url('/Vetical-MountainTea.jpg')" }}></div>
                         <div className="col-span-2 bg-cover bg-center transition-transform duration-300 hover:scale-105" style={{ backgroundImage: "url('/Rooibos.jpg')" }}></div>
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
                             <div className="absolute inset-0 bg-black/40"></div>
@@ -188,7 +194,7 @@
                     </section>
                     <section className="bg-gray-50 py-20">
                         <div className="container mx-auto text-center px-6">
-                            <img src="/Thébec 1.png" alt="Thébec Classiques Logo" className="h-24 mx-auto mb-6" onError={(e) => e.target.style.display='none'}/>
+                            <img src="/Thébec 1.png" alt="Thébec Classiques Logo" className="h-36 mx-auto mb-6" onError={(e) => e.target.style.display='none'}/>
                             <h2 className="text-4xl font-playfair-display font-bold text-stone-800 mb-12">{translations[language].classicsTitle}</h2>
                             <div className="grid grid-cols-2 md:grid-cols-5 gap-x-8 gap-y-10">
                                 {classicTeas.map((tea) => ( <div key={tea.name.fr}><h3 className={`text-2xl font-semibold ${tea.colorClass}`}>{tea.name[language]}</h3></div> ))}
@@ -223,16 +229,19 @@
 
         function ProductSlide({ tea, onTeaSelect, isTransitioning }) {
             const { language, translations, teaData } = React.useContext(LanguageContext);
+            
+            if (!tea) {
+                return <div className={`h-full w-full flex items-center justify-center transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>Loading...</div>;
+            }
+
             const otherTeas = teaData.filter(t => t.id !== tea.id);
 
-            if (!tea) return <div className="h-full w-full flex items-center justify-center">Loading...</div>;
-
             return (
-                <div className={`w-full max-w-7xl h-[calc(100vh-theme(height.32)-theme(height.24))] flex overflow-hidden rounded-lg shadow-2xl bg-white transition-all duration-300 ease-in-out transform ${isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-                    <div className="w-full md:w-1/2 flex-shrink-0 bg-gray-100 flex items-center justify-center p-4">
+                <div className={`w-full max-w-7xl h-[calc(100vh-theme(height.32)-theme(height.24))] flex flex-col md:flex-row overflow-hidden rounded-lg shadow-2xl bg-white transition-all duration-300 ease-in-out transform ${isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+                    <div className="w-full md:w-1/2 flex-shrink-0 bg-gray-100 flex items-center justify-center p-4 h-1/2 md:h-full">
                         <img src={tea.imagePath} alt={tea.name[language]} className="w-full h-full object-contain" onError={(e) => e.target.src='https://placehold.co/800x1200?text=Image+Not+Found'} />
                     </div>
-                    <div className={`w-full md:w-1/2 p-8 md:p-12 flex flex-col ${tea.backgroundColorClass} text-white overflow-y-auto`}>
+                    <div className={`w-full md:w-1/2 p-8 md:p-12 flex flex-col ${tea.backgroundColorClass} text-white overflow-y-auto h-1/2 md:h-full`}>
                         <div className="flex-grow">
                             <div className="flex items-center mb-4">
                                 {tea.elementIcon}
