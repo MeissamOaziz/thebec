@@ -264,11 +264,11 @@
                     className={`w-full h-full flex items-center justify-center bg-cover bg-center transition-opacity duration-300 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}
                     style={{ backgroundImage: `url(${tea.pageBackground})` }}
                 >
-                    <div className={`w-full max-w-7xl h-[calc(100vh-theme(height.32)-theme(height.24))] flex flex-col md:flex-row overflow-hidden rounded-lg shadow-2xl bg-white transition-all duration-300 ease-in-out transform ${isTransitioning ? 'scale-95' : 'scale-100'}`}>
-                        <div className="w-full md:w-1/2 flex-shrink-0 bg-gray-100 flex items-center justify-center p-4 h-auto md:h-full">
+                    <div className={`w-full max-w-7xl min-h-[calc(100vh-theme(height.32)-theme(height.24))] flex flex-col md:flex-row overflow-hidden rounded-lg shadow-2xl bg-white transition-all duration-300 ease-in-out transform ${isTransitioning ? 'scale-95' : 'scale-100'}`}>
+                        <div className="w-full md:w-1/2 flex-shrink-0 bg-gray-100 flex items-center justify-center p-4 max-h-[40vh] md:max-h-full">
                             <img src={tea.imagePath} alt={`Emballage du thé ${tea.name[language]}`} className="w-full h-full object-contain" onError={(e) => e.target.src='https://placehold.co/800x1200?text=Image+Not+Found'} />
                         </div>
-                        <div className={`w-full md:w-1/2 p-6 flex flex-col ${tea.backgroundColorClass} text-white flex-1 min-h-0 md:h-full overflow-y-auto`}>
+                        <div className={`w-full md:w-1/2 p-6 flex flex-col ${tea.backgroundColorClass} text-white`}>
                             <div className="flex-grow">
                                 <div className="flex items-center mb-2">
                                     {tea.elementIcon}
