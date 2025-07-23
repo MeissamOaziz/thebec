@@ -1,1 +1,1 @@
-# thebec
+# Thébec - les thés du Québec
