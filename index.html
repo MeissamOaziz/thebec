@@ -8,8 +8,8 @@
     <meta name="description" content="Découvrez Thébec, une marque de thé de luxe de Montréal. Achetez nos thés et infusions uniques, faits d'ingrédients locaux du Québec. L'expérience du terroir canadien dans chaque tasse.">
     <meta name="keywords" content="thé, thé local, thé artisanal, thé québec, thé québécois, thé d'ingrédients locaux, thé canadien, marque de thé, thé montréal, thé toronto, thé vancouver, distributeur de thé, acheter thé, thé de luxe, infusion, tisane, produits du québec, thé en vrac">
     
-    <link rel="icon" type="image/webp" href="/LogoThebec.webp">
-    <link rel="apple-touch-icon" href="/LogoThebec.webp">
+    <link rel="icon" type="image/webp" href="/LogoThebec-trnspt.webp">
+    <link rel="apple-touch-icon" href="/LogoThebec-trnspt.webp">
     
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 
@@ -74,9 +74,11 @@
             height: 52px;
             width: auto;
             cursor: pointer;
-            transition: opacity 0.2s;
+            filter: invert(1);
+            transition: opacity 0.2s, filter 0.4s;
         }
-        .header-logo:hover { opacity: 0.8; }
+        .header-logo:hover { opacity: 0.75; }
+        #site-header.scrolled .header-logo { filter: invert(0); }
 
         .header-nav {
             display: flex;
@@ -635,7 +637,33 @@
             align-items: center;
             gap: 40px;
         }
-        .footer-logo { height: 44px; width: auto; opacity: 0.8; }
+        .footer-logo { height: 44px; width: auto; opacity: 0.85; filter: invert(1); }
+
+        /* ─── LOGO WATERMARK ─── */
+        .logo-watermark {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            user-select: none;
+        }
+        /* Hero watermark — large centrepiece above the text */
+        .hero-logo-watermark {
+            top: 50%;
+            transform: translate(-50%, -62%);
+            width: min(520px, 72vw);
+            opacity: 0.12;
+            filter: invert(1);
+            animation: fadeUp 1s 0.2s both;
+        }
+        /* Classics section watermark */
+        .classics-logo-watermark {
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: min(600px, 80vw);
+            opacity: 0.06;
+            filter: invert(1);
+        }
         .footer-tagline {
             font-family: var(--font-serif);
             font-size: 16px;
@@ -748,7 +776,7 @@
 <!-- ─── HEADER ─── -->
 <header id="site-header">
     <div class="header-inner">
-        <img src="/LogoThebec.webp" alt="Thébec" class="header-logo" onclick="navigate('home')"
+        <img src="/LogoThebec-trnspt.webp" alt="Thébec" class="header-logo" onclick="navigate('home')"
              onerror="this.src='https://placehold.co/160x52?text=Thébec'">
         <nav class="header-nav">
             <span class="nav-link" data-nav="home" onclick="navigate('home')"></span>
@@ -780,11 +808,12 @@
     <!-- Hero -->
     <section id="hero" style="padding:0;">
         <div class="hero-bg-grid">
-            <div style="background-image:url('/VerticalTeaInNature.jpg')"></div>
+            <div style="background-image:url('/Vertical-TeaInNature.jpg')"></div>
             <div style="background-image:url('/FjordduSaguenay.jpg')"></div>
-            <div style="background-image:url('/HorizontalTeaLake.jpg')"></div>
+            <div style="background-image:url('/Horizontal-TeaLake.jpg')"></div>
         </div>
         <div class="hero-overlay"></div>
+        <img src="/LogoThebec-trnspt.webp" alt="" class="logo-watermark hero-logo-watermark" aria-hidden="true">
         <div class="hero-content">
             <p class="hero-eyebrow" id="hero-eyebrow-text">Thés Artisanaux · Québec</p>
             <h1 class="hero-title" id="hero-title-text">Le Québec,<br><em>infusé dans votre tasse.</em></h1>
@@ -813,7 +842,8 @@
 
     <!-- Classics -->
     <section id="classics">
-        <div class="section-inner">
+        <div class="section-inner" style="position:relative;">
+            <img src="/LogoThebec-trnspt.webp" alt="" class="logo-watermark classics-logo-watermark" aria-hidden="true">
             <p class="section-label" id="classics-label-text" style="justify-content:center;">Les Grands Classiques</p>
             <h2 class="section-title" id="classics-title-text">Les grand<em>s classiques</em></h2>
             <div class="classics-grid" id="classics-grid">
@@ -861,7 +891,7 @@
 <!-- ─── FOOTER ─── -->
 <footer>
     <div class="footer-inner">
-        <img src="/LogoThebec.webp" alt="Thébec" class="footer-logo"
+        <img src="/LogoThebec-trnspt.webp" alt="Thébec" class="footer-logo"
              onerror="this.src='https://placehold.co/130x44?text=Thébec'">
         <p class="footer-tagline" id="footer-tagline">"Le terroir québécois, dans chaque tasse."</p>
         <p class="footer-copy" id="footer-copy">© 2025 Thébec. Tous droits réservés.</p>
@@ -1363,12 +1393,12 @@ function renderAbout() {
     if (!blocks) return;
 
     const imgs = [
-        '/VerticalTeaHome.jpg',
-        '/HorizontalTeaIngredients1.jpg',
-        '/HorizontalTeaFire.jpg',
-        '/VerticalTeaIngredients.jpg',
-        '/VerticalTeaLake.jpg',
-        '/HorizontalTeaIngredients2.jpg'
+        '/Vertical-TeaHome.jpg',
+        '/Horizontal-TeaIngredients1.jpg',
+        '/Horizontal-TeaFire.jpg',
+        '/Vertical-TeaIngredients.jpg',
+        '/Vertical-TeaLake.jpg',
+        '/Horizontal-TeaIngredients2.jpg'
     ];
 
     blocks.innerHTML = `
