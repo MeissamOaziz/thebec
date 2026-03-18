@@ -647,14 +647,13 @@
             pointer-events: none;
             user-select: none;
         }
-        /* Hero watermark — sits in upper third, well above the text */
+        /* Hero watermark — small icon above headline, part of content flow */
         .hero-logo-watermark {
-            top: 18%;
-            transform: translateX(-50%);
-            width: min(180px, 28vw);
-            opacity: 0.18;
+            width: min(72px, 12vw);
+            opacity: 0.75;
             filter: invert(1);
-            animation: fadeUp 1s 0.2s both;
+            margin-bottom: 20px;
+            animation: fadeUp 0.8s 0.3s both;
         }
         /* Classics section watermark */
         .classics-logo-watermark {
@@ -813,8 +812,8 @@
             <div style="background-image:url('/Horizontal-TeaLake.jpg')"></div>
         </div>
         <div class="hero-overlay"></div>
-        <img src="/LogoThebec-trnspt.webp" alt="" class="logo-watermark hero-logo-watermark" aria-hidden="true">
         <div class="hero-content">
+            <img src="/LogoThebec-trnspt.webp" alt="" class="hero-logo-watermark" aria-hidden="true">
             <p class="hero-eyebrow" id="hero-eyebrow-text">Thés Artisanaux · Québec</p>
             <h1 class="hero-title" id="hero-title-text">Le Québec,<br><em>infusé dans votre tasse.</em></h1>
             <p class="hero-desc" id="hero-desc-text">Découvrez nos mélanges de thés, élaborés avec l'esprit des régions uniques du Québec et des éléments naturels.</p>
@@ -1393,12 +1392,12 @@ function renderAbout() {
     if (!blocks) return;
 
     const imgs = [
-        '/Vertical-TeaHome.jpg',
-        '/Horizontal-TeaIngredients1.jpg',
-        '/Horizontal-TeaFire.jpg',
-        '/Vertical-TeaIngredients.jpg',
-        '/Vertical-TeaLake.jpg',
-        '/Horizontal-TeaIngredients2.jpg'
+        '/VerticalTeaHome.jpg',
+        '/HorizontalTeaIngredients1.jpg',
+        '/HorizontalTeaFire.jpg',
+        '/VerticalTeaIngredients.jpg',
+        '/VerticalTeaLake.jpg',
+        '/HorizontalTeaIngredients2.jpg'
     ];
 
     blocks.innerHTML = `
